@@ -3,6 +3,7 @@ import getAPOD from '../api/getAPOD'
 
 export const FETCH_APOD = 'FETCH_APOD'
 export const FETCH_APODS = 'FETCH_APODS'
+export const CHANGE_CURRENT_APOD = 'CHANGE_CURRENT_APOD'
 
 export const useAPODStore = defineStore('apod', {
   state: () => ({
@@ -11,7 +12,7 @@ export const useAPODStore = defineStore('apod', {
   }),
   actions: {
     async [FETCH_APOD](date = undefined) {
-      console.log('here')
+      this.apods = []
       this.apod = await getAPOD(date)
       let currentDate = new Date().toISOString().slice(0, 10)
       let dateFromStorage = localStorage.getItem('apod')
@@ -22,6 +23,10 @@ export const useAPODStore = defineStore('apod', {
     },
     async [FETCH_APODS](count) {
       this.apods = await getAPOD(undefined, count)
+      this.CHANGE_CURRENT_APOD(0)
+    },
+    [CHANGE_CURRENT_APOD](index) {
+      this.apod = this.apods[index]
     }
   }
 })

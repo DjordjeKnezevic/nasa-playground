@@ -1,13 +1,17 @@
 <template>
   <div class="custom-input">
+    <label v-if="label" :for="id">{{ label }}</label>
     <input
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      :value="modelValue"
+      :value="modelValue || value"
       @input="$emit('update:modelValue', $event.target.value)"
       :class="{ 'is-invalid': errorMessage }"
       :pattern="pattern"
+      :id="id"
+      :checked="isChecked"
+      @click="handleClick"
     />
     <div v-if="errorMessage" class="error-text">
       {{ errorMessage }}
@@ -43,6 +47,29 @@ export default {
     pattern: {
       type: String,
       required: false
+    },
+    label: {
+      type: String,
+      required: false
+    },
+    id: {
+      type: String,
+      required: false
+    },
+    isChecked: {
+      type: Boolean,
+      default: false
+    },
+    value: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.type === 'radio') {
+        this.$emit('update:modelValue', this.value)
+      }
     }
   }
 }
