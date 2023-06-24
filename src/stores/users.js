@@ -10,6 +10,8 @@ export const CHANGE_ROLE = 'CHANGE_ROLE'
 export const LOGIN_USER = 'LOGIN_USER'
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const REGISTER_USER = 'REGISTER_USER'
+export const CONTACT_ADMIN = 'CONTACT_ADMIN'
+export const DELETE_REQUEST = 'DELETE_REQUEST'
 
 export const useUsersStore = defineStore('user', {
   state: () => ({
@@ -24,7 +26,8 @@ export const useUsersStore = defineStore('user', {
             name: 'admin',
             email: 'admin@gmail.com',
             password: 'admin',
-            role: 'admin'
+            role: 'admin',
+            requests: []
           }
         ]
   }),
@@ -59,8 +62,20 @@ export const useUsersStore = defineStore('user', {
       this.LOGIN_USER(newUser)
       return true
     },
-    [CHANGE_ROLE](role) {
-      this.loggedUser.role = role
+    [CHANGE_ROLE](user, role) {
+      user.role = role
+    },
+    [CONTACT_ADMIN](requestObj) {
+      const admin = this.users.find((user) => user.role === 'admin')
+      requestObj.id = admin.requests.length + 1
+      admin.requests.push(requestObj)
+      localStorage.setItem('users', JSON.stringify(this.users))
+    },
+    [DELETE_REQUEST](requestId) {
+      const admin = this.users.find((user) => user.role === 'admin')
+      const updatedRequests = admin.requests.filter((request) => request.id !== requestId)
+      admin.requests = updatedRequests
+      localStorage.setItem('users', JSON.stringify(this.users))
     }
   }
 })

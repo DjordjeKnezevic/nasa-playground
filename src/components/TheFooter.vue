@@ -2,18 +2,16 @@
   <div id="footer">
     <div class="connect">
       <div>
-        <h1>FOLLOW OUR MISSIONS ON</h1>
+        <h1>FOLLOW US ON</h1>
         <div>
-          <a href="http://freewebsitetemplates.com/go/facebook/" class="facebook">facebook</a>
-          <a href="http://freewebsitetemplates.com/go/twitter/" class="twitter">twitter</a>
-          <a href="http://freewebsitetemplates.com/go/googleplus/" class="googleplus">googleplus</a>
-          <a href="http://freewebsitetemplates.com/go/pinterest/" class="pinterest">pinterest</a>
+          <a href="http://www.facebook.com" class="facebook">facebook</a>
+          <a href="http://www.twitter.com" class="twitter">twitter</a>
         </div>
       </div>
     </div>
     <div class="footnote">
       <div>
-        <p>&copy; 2023 BY SPACE PROSPECTION | ALL RIGHTS RESERVED</p>
+        <p>&copy; 2023 BY NASA PLAYGROUND</p>
       </div>
     </div>
   </div>

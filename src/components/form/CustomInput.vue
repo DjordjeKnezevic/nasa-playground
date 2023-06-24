@@ -90,6 +90,8 @@ export default {
   outline: none;
   background-color: rgba(0, 123, 255, 0.7) !important;
 }
+</style>
+<style>
 .error-text {
   margin-top: -10px !important;
   margin-bottom: 20px !important;

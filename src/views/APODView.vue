@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="img-quality-picker">
-      <h4>Choose image quality</h4>
-      <div class="img-quality-choices">
+      <div v-role="['admin', 'premium-user']" class="img-quality-choices">
+        <h4>Choose image quality</h4>
         <CustomInput
           type="radio"
           v-model="resolution"
@@ -57,8 +57,17 @@
           :value="'HD'"
         />
       </div>
+      <div v-role="['user']" class="unavailable">
+        <h4>Choose image quality</h4>
+        <h3>Available for premium users only</h3>
+        <p>(Contact admin to request an upgrade to a premium user)</p>
+      </div>
     </div>
-    <div class="container-wrapper">
+    <div v-role="['unauthorized']" class="unavailable">
+      <h2>Search APOD's</h2>
+      <p>Login or Register to access this feature</p>
+    </div>
+    <div v-role="['user', 'premium-user', 'admin']" class="container-wrapper">
       <div class="search-container">
         <h3>Search APOD for specific date:</h3>
         <CustomInput type="date" v-model="searchDate" :errorMessage="errorMessageDate" />
@@ -266,7 +275,7 @@ export default {
   opacity: 0.6;
 }
 .container-wrapper {
-  display: flex;
+  display: flex !important;
   justify-content: space-around;
   width: 70%;
 }
@@ -302,14 +311,20 @@ export default {
   align-items: center;
 }
 .img-quality-picker h4 {
-  margin-bottom: 0px;
+  margin-bottom: 10px;
+}
+
+.unavailable {
+  margin-top: 10px;
+  text-align: center;
+}
+.unavailable h3 {
+  margin-top: -10px;
+}
+.unavailable p {
+  margin-top: 0;
 }
 .img-quality-choices {
-  display: flex;
-  align-items: baseline;
-}
-.img-quality-choices label,
-.img-quality-choice {
-  margin: 10px 10px !important;
+  text-align: center;
 }
 </style>

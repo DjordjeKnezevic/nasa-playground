@@ -25,7 +25,7 @@
             v-model="password"
             :errorMessage="passwordError"
           />
-          <input type="submit" value="Send" id="submit" />
+          <input type="submit" value="Register" id="submit" />
         </form>
       </div>
     </div>

@@ -18,7 +18,7 @@
             v-model="password"
             :errorMessage="passwordError"
           />
-          <input type="submit" value="Send" id="submit" />
+          <input type="submit" value="Login" id="submit" />
         </form>
       </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script>
 import CustomInput from '../components/form/CustomInput.vue'
-import { mapActions } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useUsersStore, LOGIN_USER } from '@/stores/users'
 export default {
   name: 'LoginView',
@@ -41,6 +41,9 @@ export default {
       emailError: '',
       passwordError: ''
     }
+  },
+  computed: {
+    ...mapState(useUsersStore, ['loggedUser'])
   },
   methods: {
     ...mapActions(useUsersStore, [LOGIN_USER]),
@@ -56,8 +59,8 @@ export default {
         this.passwordError = 'Incorrect password'
         return
       }
-      // this.$forceUpdate()
-      this.$router.push({ name: 'Home' })
+      if (this.loggedUser.role === 'admin') this.$router.push({ name: 'AdminPanel' })
+      else this.$router.push({ name: 'Home' })
     }
   },
   watch: {

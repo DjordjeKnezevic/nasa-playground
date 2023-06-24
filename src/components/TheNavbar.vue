@@ -12,7 +12,7 @@
           :class="['Projects', 'Blog'].includes(item.text) ? 'menu' : ''"
         >
           <RouterLink :to="item.url">{{ item.text }}</RouterLink>
-          <ul v-if="item.text === 'Projects'" class="primary">
+          <!-- <ul v-if="item.text === 'Projects'" class="primary">
             <li>
               <RouterLink to="/projects/1">proj 1</RouterLink>
             </li>
@@ -27,7 +27,7 @@
             <li>
               <RouterLink to="/blog/2">Second post</RouterLink>
             </li>
-          </ul>
+          </ul> -->
         </li>
       </ul>
     </div>
@@ -44,20 +44,19 @@
             <li>
               <RouterLink :to="'/profile?id=' + loggedUser.id">Go to my profile</RouterLink>
             </li>
+            <li v-role="['admin']">
+              <RouterLink to="/adminpanel">Go to admin panel</RouterLink>
+            </li>
             <li><RouterLink @click="logoutUser" to="/">Logout</RouterLink></li>
           </ul>
           <RouterLink :to="'/profile?id=' + loggedUser.id"> {{ loggedUser.name }}</RouterLink>
         </li>
       </ul>
     </div>
-    <div v-role="['admin']" class="user-block">admin</div>
-
-    <!-- <button @click="chRole()">Change Role to Admin</button> -->
   </div>
 </template>
 
 <script>
-// import { useUsersStore, CHANGE_ROLE } from '@/stores/users'
 import { mapState, mapActions } from 'pinia'
 import { useUsersStore, LOGOUT_USER } from '@/stores/users'
 
@@ -65,11 +64,16 @@ export default {
   name: 'TheNavbar',
   data() {
     return {
+      // navItems: [
+      //   { text: 'Home', url: '/' },
+      //   { text: 'APOD', url: '/apod' },
+      //   { text: 'Projects', url: '/projects' },
+      //   { text: 'Blog', url: '/blog' },
+      //   { text: 'Contact', url: '/contact' }
+      // ]
       navItems: [
         { text: 'Home', url: '/' },
         { text: 'APOD', url: '/apod' },
-        { text: 'Projects', url: '/projects' },
-        { text: 'Blog', url: '/blog' },
         { text: 'Contact', url: '/contact' }
       ]
     }
@@ -81,23 +85,8 @@ export default {
     ...mapActions(useUsersStore, [LOGOUT_USER]),
     logoutUser() {
       this.LOGOUT_USER()
-      // this.$forceUpdate()
       this.$router.push({ name: 'Home' })
     }
-  },
-  // methods: {
-  //   ...mapActions(useUsersStore, [CHANGE_ROLE]),
-  //   async chRole() {
-  //     console.log(this.loggedUser.role)
-  //     let role = this.loggedUser.role === 'unauthorized' ? 'admin' : 'unauthorized'
-  //     this.CHANGE_ROLE(role)
-  //     this.$forceUpdate()
-  //     console.log(this.loggedUser.role)
-  //   }
-  // },
-  mounted() {
-    console.log(this.loggedUser)
-    console.log(this.loggedUser.role)
   }
 }
 </script>

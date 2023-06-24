@@ -6,7 +6,7 @@
         <h1>Check out APOD</h1>
         <h2>NASA's Astronomy Picture Of The Day</h2>
         <RouterLink to="/apod" class="more">View APOD</RouterLink>
-        <h3>FEATURED PROJECTS</h3>
+        <!-- <h3>FEATURED PROJECTS</h3>
         <ul>
           <li>
             <RouterLink to="/projects"
@@ -28,10 +28,10 @@
               ><img src="@/assets/images/project-image4.jpg" alt=""
             /></RouterLink>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
-    <div class="body">
+    <!-- <div class="body">
       <div>
         <h1>OUR MISSION</h1>
         <p>
@@ -71,8 +71,8 @@
             </ul>
           </li>
         </ul>
-      </div>
-    </div>
+      </div> 
+    </div>-->
   </div>
 </template>
 
@@ -95,7 +95,8 @@ export default {
 #body.home {
   background: none;
   margin: 0;
-  min-height: 1308px;
+  /* min-height: 1308px; */
+  min-height: 708px;
   overflow: hidden;
   padding: 0;
   width: 100%;
